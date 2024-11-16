@@ -1,19 +1,16 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/ChiOAoIL)
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=17158849)
 ## CS472-Final-Project-November-2024 
-### Policies for the Students: Policies for a Better Academic Experience
+### Policies for the Students: Policies for a Better Campus Experience
 The requirements below are for the standalone project. For groups, please refer to the additional requirements section below.  
   
 You will build a full-stack web application using React for the frontend and Express for the backend. The project will focus on state management, API interactions (REST), and component-based architecture.
-* The application displays policies from all users by academic year.
+* The application displays policies from all users by calendar year, sorted by votes in descending order.
 * The application should provide ways to browse previous academic years (history).
 * Guests can browse policies, but cannot add a new policy.
 * Implement signup/signin and save the user state at the client.
 * Only users can contribute and submit a new policy.
 * A policy consists of a title, description, owner, date, and category (General, Food, Library, Meditation, Education, Visa & Travel, Students Lounge.. etc).
-* A policy can be up-voted or down-voted by users, once per policy. Guests cannot up-vote or down-vote.
-* Policies are sorted by vote in descending order.
-* For the protected actions (Add policy, Up-Vote, Down-Vote), implement a middleware at the server to verify the user registration state.
+* A policy can be up-voted by users, once per policy. Guests cannot up-vote.
+* For the protected actions (Add policy, Up-Vote), implement a middleware at the server to verify the user registration state.
   
 ## Frontend (React) Technical Requirements
 * Create a well-structured component hierarchy.
@@ -26,13 +23,13 @@ You will build a full-stack web application using React for the frontend and Exp
   
 ## Backend (Express) Technical Requirements
 * Create RESTful API endpoints to handle frontend requests and setup routes for different endpoints (e.g., GET, POST, PUT).
-* Create a middleware to verify the user registration state before allowing access to the protected routes (add policy, up-vote, down-vote).
+* Create a middleware to verify the user registration state before allowing access to the protected routes (add policy, up-vote).
 * Use morgan middleware for logging requests and handling errors.
 * Use cors to allow communication between the frontend and backend applications on different ports.
 * Use `node:fs` to store and manage the policies as files on the file system. If you have strong DBMS skills (for example [MySQL](https://www.npmjs.com/package/mysql2), you may use it for storage instead of node file system.
 
 ## Group Project Requirements (Does not apply to students who work standalone)
-Standlone students are welcome to work on these requirements, but will not be evaluated or receive credits. Groups are subject to pre-approval, if you wish to work as a group, please send me your team members' names before 12:00 PM noon of Nov 15 and I will review your request and approve your team formation. Groups must have two students only.       
+Standalone students are welcome to work on these requirements, but they will not be evaluated or receive extra credits for these requirements. Groups are subject to pre-approval, if you wish to work as a group, please send me your team members' names before 12:00 PM noon of Nov 15 and I will review your request and approve your team formation. Groups must have two students only.       
   
 In addition to the previous requirements, groups must complete the following requirements:
 * Allow users to add comments to policies. Multiple comments are allowed.

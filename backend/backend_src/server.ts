@@ -3,14 +3,19 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { loginController, signupController } from './controller';
 import morgan from 'morgan';
+import { connectDB } from './Data_Layer/db_connection';
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan('dev'));
-
-//routes
-app.post('/login', loginController);
+app.post('/signin', loginController);
 app.post('/signup', signupController);
 
-app.listen(3000, () => console.log(`Server running on port 3000`));
+//app.listen(3000, () => console.log(`Server running on port 3000`));
+
+connectDB()
+    .then(() => {
+        app.listen(3000, () => console.log(`Server running on http://localhost:3000`));
+    })
+    .catch((error) => console.error('Failed to start server:', error));

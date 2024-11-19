@@ -3,19 +3,19 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../Business/localstorage_crud';
 
-interface AddPolicyFormProps {
-    onAdd: (policy: Policy) => void;
-}
+// interface AddPolicyFormProps {
+//     onAdd: (policy: Policy) => void;
+// }
 
-interface Policy {
-    id: number;
-    title: string;
-    description: string;
-    // owner: string;
-    date: string;
-    category: string;
-    vote: number;
-}
+// interface Policy {
+//     id: number;
+//     title: string;
+//     description: string;
+//     // owner: string;
+//     date: string;
+//     category: string;
+//     vote: number;
+// }
 
 const AddPolicyPage: React.FC = () => {
     const navigate = useNavigate();

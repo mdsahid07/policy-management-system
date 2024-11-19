@@ -5,7 +5,7 @@ import Dashboard from './UI/dashboard';
 //import Policies from './UI/PolicyList';
 import PoliciesPage from './UI/PoliciesPage';
 import AddPolicyPage from './UI/AddPolicyForm';
-import Home from './UI/home';
+
 import Layout from './UI/Layout';
 //import Dashboard from './pages/Dashboard';
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { storeToken, storeUserId } from '../Business/localstorage_crud';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from "../url";
 
 const Signin: React.FC = () => {
     const [formData, setFormData] = useState({ username: '', password: '' });
@@ -9,7 +10,7 @@ const Signin: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:3000/signin', formData);
+            const res = await axios.post(`${BASE_URL}signin`, formData);
             //localStorage.setItem('token', res.data.result);
             if (res.data.success) {
                 const userid = res.data.result.split('!!!@#$')[1];

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../Business/localstorage_crud';
+import BASE_URL from '../url';
 
 // interface AddPolicyFormProps {
 //     onAdd: (policy: Policy) => void;
@@ -46,7 +47,7 @@ const AddPolicyPage: React.FC = () => {
     // };
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        fetch('http://localhost:3000/addPolicy', {
+        fetch(`${BASE_URL}addPolicy`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', authorization: `Bearer ${getToken()}` },
             body: JSON.stringify(formData),
@@ -60,7 +61,7 @@ const AddPolicyPage: React.FC = () => {
                 } else {
                     // Handle the case when success is false
 
-                    alert(data.result);
+                    alert('You are unathorized for add policy');
 
                     // Assuming there is a message or error description
                 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import BASE_URL from '../url';
 
 const Signup: React.FC = () => {
     const [formData, setFormData] = useState({ username: '', password: '' });
@@ -7,7 +8,7 @@ const Signup: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:3000/signup', formData);
+            const res = await axios.post(`${BASE_URL}signup`, formData);
 
             alert(res.data.result);
         } catch (error: any) {

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getToken, getUserId } from '../Business/localstorage_crud';
+import BASE_URL from '../url';
 
 interface Policy {
     id: number;
@@ -20,7 +21,7 @@ const PoliciesPage: React.FC = () => {
 
     useEffect(() => {
         // Fetch policies from backend
-        fetch('http://localhost:3000/policies')
+        fetch(`${BASE_URL}policies`)
             .then((res) => res.json())
             .then((data) => setPolicies(data.result))
             .catch((err) => console.error(err));
@@ -48,7 +49,7 @@ const PoliciesPage: React.FC = () => {
     // };
     const userid = getUserId();
     const handleUpvote = (id: number) => {
-        fetch(`http://localhost:3000/${id}/upvote`, {
+        fetch(`${BASE_URL}${id}/upvote`, {
 
             method: 'POST',
             headers: { 'Content-Type': 'application/json', authorization: `Bearer ${getToken()}` },

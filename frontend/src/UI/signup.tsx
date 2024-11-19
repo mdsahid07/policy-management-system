@@ -8,8 +8,10 @@ const Signup: React.FC = () => {
         e.preventDefault();
         try {
             const res = await axios.post('http://localhost:3000/signup', formData);
+
             alert(res.data.result);
         } catch (error: any) {
+            alert(error);
             console.error(error.response?.data?.result || 'Error occurred');
         }
     };

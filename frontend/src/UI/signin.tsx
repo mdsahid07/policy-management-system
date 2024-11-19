@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { storeToken } from '../Business/localstorage_crud';
+import { storeToken, storeUserId } from '../Business/localstorage_crud';
 import { useNavigate } from 'react-router-dom';
 
 const Signin: React.FC = () => {
@@ -10,10 +10,19 @@ const Signin: React.FC = () => {
         e.preventDefault();
         try {
             const res = await axios.post('http://localhost:3000/signin', formData);
-            //localStorage.setItem('token', res.data.result); 
-            storeToken(res.data.result);
-            navigate('/dashboard');
-            alert('Signin successful!');
+            //localStorage.setItem('token', res.data.result);
+            if (res.data.success) {
+                const userid = res.data.result.split('!!!@#$')[1];
+                storeUserId(userid);
+                const token = res.data.result.split('!!!@#$')[0];
+                storeToken(token);
+
+                alert('Signin successful!');
+                navigate('/');
+            }
+            else {
+                alert(res.data.result);
+            }
         } catch (error: any) {
             console.error(error.response?.data?.message || 'Error occurred');
         }

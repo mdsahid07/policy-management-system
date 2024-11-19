@@ -12,7 +12,20 @@ const config = {
 
 
 };
+// const config = {
+//     user: 'systemadmin',
+//     password: 'Jahid123456',
+//     server: 'miusqldemo.database.windows.net',
+//     database: 'StudentPolicy',
+//     port: 1433,
+//     options: {
+//         encrypt: true,
+//         trustServerCertificate: false,
 
+//     },
+
+
+// };
 export const connectDB = async () => {
     try {
         return await sql.connect(config);

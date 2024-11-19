@@ -1,5 +1,5 @@
 import React from 'react';
-import { clearToken, isAuthenticated } from '../Business/localstorage_crud';
+import { clearToken, clearUserId, isAuthenticated } from '../Business/localstorage_crud';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
@@ -7,6 +7,7 @@ const Dashboard: React.FC = () => {
 
     const handleSignout = () => {
         clearToken();
+        clearUserId();
         navigate('/signin');
     };
 

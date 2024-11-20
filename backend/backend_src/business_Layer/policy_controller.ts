@@ -1,10 +1,10 @@
 import express, { Request, RequestHandler, Response } from 'express';
 //import { poolPromise } from '../Data_Layer/db_connection';
 import { checkVoteDuplication, create_policy, getAllPolicies, update_upvote_policy } from '../Data_Layer/db_crud';
-import { authenticate } from './middleware';
+//import { authenticate } from './middleware';
 //import { dataInfo } from './getAuthInfo';
-import jwt from 'jsonwebtoken';
-const SECRET = 'sahidmiuaugentryid618670';
+// import jwt from 'jsonwebtoken';
+// const SECRET = 'sahidmiuaugentryid618670';
 const router = express.Router();
 
 // Get all policies (sorted by vote in descending order)

@@ -4,7 +4,7 @@ import cors from 'cors';
 import { loginController, signupController } from './business_Layer/auth_controller';
 import { addPolicyController, getPolicies, upVotePolicy } from './business_Layer/policy_controller';
 import morgan from 'morgan';
-import connectDB from './Data_Layer/db_connection';
+//import connectDB from './Data_Layer/db_connection';
 import { authenticate } from './business_Layer/middleware';
 import dotenv from 'dotenv';
 dotenv.config();

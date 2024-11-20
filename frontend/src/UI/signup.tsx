@@ -5,14 +5,44 @@ import { useNavigate } from 'react-router-dom';
 
 const Signup: React.FC = () => {
     const [formData, setFormData] = useState({ username: '', password: '' });
+    const [errors, setErrors] = useState({ username: '', password: '' });
     const navigate = useNavigate();
+    const validateForm = () => {
+        let isValid = true;
+        const newErrors = { username: '', password: '' };
+
+        // Username validation
+        if (!formData.username.trim()) {
+            newErrors.username = 'Username is required.';
+            isValid = false;
+        }
+
+        // Password validation
+        if (!formData.password.trim()) {
+            newErrors.password = 'Password is required.';
+            isValid = false;
+        } else if (formData.password.length < 6) {
+            newErrors.password = 'Password must be at least 6 characters long.';
+            isValid = false;
+        }
+
+        setErrors(newErrors); // Update error state
+        return isValid;
+    };
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!validateForm()) {
+            alert('username and password required, password must be at least 6 char long');
+            return;
+        };
         try {
             const res = await axios.post(`${BASE_URL}signup`, formData);
 
             alert(res.data.result);
-            navigate('/signin');
+            if (res.data.success) {
+                navigate('/signin');
+            }
+
         } catch (error: any) {
             alert(error);
             console.error(error.response?.data?.result || 'Error occurred');

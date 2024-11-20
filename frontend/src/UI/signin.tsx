@@ -5,7 +5,6 @@ import { AuthContext } from '../context/AuthContext';
 const Signin: React.FC = () => {
     const [formData, setFormData] = useState({ username: '', password: '' });
     const { signIn } = useContext(AuthContext);
-    const [errors, setErrors] = useState({ username: '', password: '' });
     const navigate = useNavigate();
     const validateForm = () => {
         let isValid = true;
@@ -24,9 +23,7 @@ const Signin: React.FC = () => {
         } else if (formData.password.length < 6) {
             newErrors.password = 'Password must be at least 6 characters long.';
             isValid = false;
-        }
-
-        setErrors(newErrors); // Update the error state
+        }// Update the error state
         return isValid;
     };
     const handleSubmit = async (e: React.FormEvent) => {

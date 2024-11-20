@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Signup: React.FC = () => {
     const [formData, setFormData] = useState({ username: '', password: '' });
-    const [errors, setErrors] = useState({ username: '', password: '' });
     const navigate = useNavigate();
     const validateForm = () => {
         let isValid = true;
@@ -25,8 +24,6 @@ const Signup: React.FC = () => {
             newErrors.password = 'Password must be at least 6 characters long.';
             isValid = false;
         }
-
-        setErrors(newErrors); // Update error state
         return isValid;
     };
     const handleSubmit = async (e: React.FormEvent) => {

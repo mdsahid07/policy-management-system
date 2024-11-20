@@ -1,7 +1,7 @@
 //import { RequestHandler } from 'express';
 import express, { RequestHandler, Request, Response } from 'express';
 import { hashPassword } from '../node_crypto';
-import { checkUser, createUser, getUser, getUserId } from '../Data_Layer/db_crud';
+import { checkUser, createUser, getUser, getUserId } from '../database/db_crud';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 //const users: { username: string; password: string; }[] = [];

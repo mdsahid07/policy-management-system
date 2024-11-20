@@ -1,13 +1,7 @@
 import express, { Request, RequestHandler, Response } from 'express';
-//import { poolPromise } from '../Data_Layer/db_connection';
-import { checkVoteDuplication, create_policy, getAllPolicies, update_upvote_policy } from '../Data_Layer/db_crud';
-//import { authenticate } from './middleware';
-//import { dataInfo } from './getAuthInfo';
-// import jwt from 'jsonwebtoken';
-// const SECRET = 'sahidmiuaugentryid618670';
-const router = express.Router();
+import { checkVoteDuplication, create_policy, getAllPolicies, update_upvote_policy } from '../database/db_crud';
 
-// Get all policies (sorted by vote in descending order)
+const router = express.Router();
 
 
 export const getPolicies = async (req: Request, res: Response) => {
@@ -61,15 +55,5 @@ export const upVotePolicy = async (req: Request, res: Response) => {
         res.json({ success: false, message: 'Policy updated Error ' + error });
     }
 };
-
-//router.post('/:id/downvote', authenticate, async (req: Request, res: Response) => {
-// export const downVotePolicy = async (req: Request, res: Response) => {
-//     try {
-//         await update_downvote_policy(req.params.id);
-//         res.json({ success: true, message: 'Policy updated successfully.' });
-//     } catch (error) {
-//         res.json({ success: false, message: 'Policy updated Error ' + error });
-//     }
-// };
 
 export default router;

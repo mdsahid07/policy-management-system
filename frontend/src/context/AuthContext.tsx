@@ -22,10 +22,10 @@ export const AuthContext = createContext<IAuthContext>(defaultAuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode; }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const signIn = async (data: ILogin) => {
+    const signIn = async (data: ILogin): Promise<{ success: boolean; message: string; }> => {
         try {
             const res = await axios.post(`${BASE_URL}signin`, data);
-            //localStorage.setItem('token', res.data.result);
+
             if (res.data.success) {
                 const userid = res.data.result.split('!!!@#$')[1];
                 storeUserId(userid);
@@ -33,13 +33,17 @@ export const AuthProvider = ({ children }: { children: ReactNode; }) => {
                 storeToken(token);
                 setIsAuthenticated(true);
                 alert('Signin successful!');
-            }
-            else {
-                throw new Error(res.data.result);
+                return { success: true, message: 'Signin successful!' };
+            } else {
+
+                return { success: false, message: res.data.result };
             }
         } catch (error: any) {
             setIsAuthenticated(false);
-            console.error(error.response?.data?.message || 'Error occurred');
+
+            const errorMessage =
+                error.response?.data?.message || 'An error occurred during sign-in.';
+            return { success: false, message: errorMessage };
         }
     };
     const signOut = () => {

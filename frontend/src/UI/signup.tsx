@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Signup: React.FC = () => {
     const [formData, setFormData] = useState({ username: '', password: '' });
+    const [errors, setErrors] = useState({ username: '', password: '' });
     const navigate = useNavigate();
     const validateForm = () => {
         let isValid = true;
@@ -24,14 +25,13 @@ const Signup: React.FC = () => {
             newErrors.password = 'Password must be at least 6 characters long.';
             isValid = false;
         }
+
+        setErrors(newErrors); // Update errors state
         return isValid;
     };
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!validateForm()) {
-            alert('username and password required, password must be at least 6 char long');
-            return;
-        };
+        if (!validateForm()) return;
         try {
             const res = await axios.post(`${BASE_URL}signup`, formData);
 
@@ -50,19 +50,47 @@ const Signup: React.FC = () => {
         <div className="flex justify-center items-center h-screen bg-gray-100">
             <form onSubmit={handleSubmit} className="p-8 bg-white shadow-md rounded">
                 <h1 className="text-2xl font-bold mb-4">Signup</h1>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    className="block w-full p-2 mb-4 border rounded"
-                    onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    className="block w-full p-2 mb-4 border rounded"
-                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                />
-                <button className="w-full bg-blue-500 text-white p-2 rounded">Signup</button>
+
+                {/* Username Input */}
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        className={`block w-full p-2 border rounded ${errors.username ? 'border-red-500' : ''
+                            }`}
+                        value={formData.username}
+                        onChange={(e) =>
+                            setFormData({ ...formData, username: e.target.value })
+                        }
+                    />
+                    {errors.username && (
+                        <p className="text-red-500 text-sm mt-1">{errors.username}</p>
+                    )}
+                </div>
+
+                {/* Password Input */}
+                <div className="mb-4">
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        className={`block w-full p-2 border rounded ${errors.password ? 'border-red-500' : ''
+                            }`}
+                        value={formData.password}
+                        onChange={(e) =>
+                            setFormData({ ...formData, password: e.target.value })
+                        }
+                    />
+                    {errors.password && (
+                        <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+                    )}
+                </div>
+
+                <button
+                    type="submit"
+                    className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+                >
+                    Signup
+                </button>
             </form>
         </div>
     );

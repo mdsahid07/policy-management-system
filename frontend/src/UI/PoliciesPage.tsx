@@ -33,20 +33,6 @@ const PoliciesPage: React.FC = () => {
         )
         .sort((a, b) => b.vote - a.vote);
 
-    // const handleUpvote = (id: number) => {
-    //     fetch(
-    //         `http://localhost:3000/${id}/upvote`,
-    //         { method: 'POST', headers: { authorization: `Bearer ${getToken()}` } }
-    //     )
-    //         .then(() => {
-    //             setPolicies((prev) =>
-    //                 prev.map((policy) =>
-    //                     policy.id === id ? { ...policy, vote: policy.vote + 1 } : policy
-    //                 )
-    //             );
-    //         })
-    //         .catch((err) => console.error(err));
-    // };
     const userid = getUserId();
     const handleUpvote = (id: number) => {
         fetch(`${BASE_URL}${id}/upvote`, {
@@ -72,7 +58,7 @@ const PoliciesPage: React.FC = () => {
                     }
                     else {
                         //alert(data);
-                        alert('You are unauthorize, you can not giving the vote!!!');
+                        alert('Sorry!!! You are not authorized, Please login for giving vote!!!');
                     }
                     // Assuming there is a message or error description
                 }

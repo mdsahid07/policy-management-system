@@ -61,7 +61,7 @@ const AddPolicyPage: React.FC = () => {
                 } else {
                     // Handle the case when success is false
 
-                    alert('You are unathorized for add policy');
+                    alert('Sorry!!! You are not authorized, Please login for add policy!!');
 
                     // Assuming there is a message or error description
                 }

@@ -57,7 +57,7 @@ const Layout: React.FC = () => {
 
             {/* Footer */}
             <footer className="bg-gray-800 text-gray-400 text-center py-3">
-                &copy; {new Date().getFullYear()} MIU Student Policy. All rights reserved.
+                &copy; {new Date().getFullYear()} Md Sahid Hossain. All rights reserved.
             </footer>
         </div>
     );

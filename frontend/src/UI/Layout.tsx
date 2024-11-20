@@ -1,26 +1,21 @@
 // src/components/Layout.tsx
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const Layout: React.FC = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+    const { isAuthenticated, signOut, setAUthentication } = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         // Check if there is a token in localStorage to determine if the user is authenticated
-        const token = localStorage.getItem('authToken');
-        if (token) {
-            setIsAuthenticated(true);
-        } else {
-            setIsAuthenticated(false);
-        }
+        setAUthentication();
     }, []);
 
     const handleSignOut = () => {
         // Clear the token on sign-out
-        localStorage.removeItem('authToken');
-        setIsAuthenticated(false);
+        signOut();
         navigate('/signin'); // Redirect to the sign-in page
     };
 

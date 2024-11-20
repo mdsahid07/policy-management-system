@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Pool",
+    "description": "slfsj sjfj;f j;sf  skfl",
+    "owner": "habib",
+    "date": "2024-10-31T00:00:00.000Z",
+    "vote": 3,
+    "category": "General"
+  },
+  {
+    "id": 2,
+    "title": "Dinner",
+    "description": "ljl lsjf;s j ljsff jl;sfj j; sf ; sf ",
+    "owner": "habib",
+    "date": "2024-11-03T00:00:00.000Z",
+    "vote": 2,
+    "category": "Meditation"
+  }
+]

@@ -1,6 +1,6 @@
 import express, { Request, RequestHandler, Response } from 'express';
 //import { poolPromise } from '../Data_Layer/db_connection';
-import { checkVoteDuplication, create_policy, getAllPolicies, update_downvote_policy, update_upvote_policy } from '../Data_Layer/db_crud';
+import { checkVoteDuplication, create_policy, getAllPolicies, update_upvote_policy } from '../Data_Layer/db_crud';
 import { authenticate } from './middleware';
 //import { dataInfo } from './getAuthInfo';
 import jwt from 'jsonwebtoken';
@@ -46,14 +46,14 @@ export const upVotePolicy = async (req: Request, res: Response) => {
         //console.log(dataInfo.response);
         const { userid } = req.body;
         console.log(req.params.id);
-        const chk = await checkVoteDuplication(BigInt(req.params.id), BigInt(userid));
+        const chk = await checkVoteDuplication(req.params.id, userid);
         if (chk == false) {
             //console.log(ss);
             res.json({ success: false, message: 'Already voted' });
         }
         else {
             //console.log(ss);
-            await update_upvote_policy(BigInt(req.params.id));
+            await update_upvote_policy(req.params.id);
             res.json({ success: true, message: 'Policy updated successfully.' });
         }
 
@@ -63,13 +63,13 @@ export const upVotePolicy = async (req: Request, res: Response) => {
 };
 
 //router.post('/:id/downvote', authenticate, async (req: Request, res: Response) => {
-export const downVotePolicy = async (req: Request, res: Response) => {
-    try {
-        await update_downvote_policy(BigInt(req.params.id));
-        res.json({ success: true, message: 'Policy updated successfully.' });
-    } catch (error) {
-        res.json({ success: false, message: 'Policy updated Error ' + error });
-    }
-};
+// export const downVotePolicy = async (req: Request, res: Response) => {
+//     try {
+//         await update_downvote_policy(req.params.id);
+//         res.json({ success: true, message: 'Policy updated successfully.' });
+//     } catch (error) {
+//         res.json({ success: false, message: 'Policy updated Error ' + error });
+//     }
+// };
 
 export default router;

@@ -5,7 +5,7 @@ if (import.meta.env.DEV) {
 }
 
 if (import.meta.env.PROD) {
-    BASE_URL = "";
+    BASE_URL = "https://wap-final-project.onrender.com/";
 }
 
 export default BASE_URL;

@@ -1,48 +1,19 @@
-// import sql from 'mssql';
+import { Pool } from "pg"; // Import the PostgreSQL Pool class
 
-// const config = {
-//     user: 'sa',
-//     password: '123456',
-//     server: 'localhost',
-//     database: 'StudentPolicy',
-//     options: {
-//         encrypt: true,
-//         trustServerCertificate: true,
-//     },
-
-
-// };
-
-// export const connectDB = async () => {
-//     try {
-//         return await sql.connect(config);
-//     } catch (error) {
-//         console.log("Db Connection Error!!!!");
-//         console.error('Database connection failed:', error);
-//         throw error;
-//     }
-// };
-
-import mysql from "mysql2/promise";
 const connectDB = async () => {
-    const db = await mysql.createPool({
-        host: "localhost",    // Your MySQL host (e.g., localhost)
-        user: "root",         // Your MySQL username
-        password: "123456", // Your MySQL password
+    const db = new Pool({
+        host: "postgresql://root:91utkAfYlTxt4nBecM7B9tCCu0RN5iam@dpg-csui6d1u0jms73apvl8g-a/studentpolicy",    // Your PostgreSQL host (e.g., localhost)
+        user: "root",     // Your PostgreSQL username
+        password: "91utkAfYlTxt4nBecM7B9tCCu0RN5iam",   // Your PostgreSQL password
         database: "studentpolicy", // Your database name
+        port: 5432,           // Default PostgreSQL port
     });
+
+    // Test the connection
+    await db.connect();
+    console.log("Connected to PostgreSQL database!");
+
     return db; // Return the pool object
 };
 
 export default connectDB;
-// const db = mysql.createPool({
-//     host: "localhost",    // Replace with your MySQL host
-//     user: "root",         // Replace with your MySQL username
-//     password: "123456", // Replace with your MySQL password
-//     database: "studentpolicy",  // Replace with your database name
-//     waitForConnections: true,
-//     connectionLimit: 10,
-//     queueLimit: 0,
-// });
-
-// export default db;

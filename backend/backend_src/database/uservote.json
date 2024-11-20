@@ -1,0 +1,22 @@
+[
+  {
+    "userid": "1",
+    "policyid": "1"
+  },
+  {
+    "userid": "1",
+    "policyid": "2"
+  },
+  {
+    "userid": "2",
+    "policyid": "1"
+  },
+  {
+    "userid": "3",
+    "policyid": "2"
+  },
+  {
+    "userid": "3",
+    "policyid": "1"
+  }
+]

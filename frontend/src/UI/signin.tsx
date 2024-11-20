@@ -1,31 +1,20 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { storeToken, storeUserId } from '../Business/localstorage_crud';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BASE_URL from "../url";
+import { AuthContext } from '../context/AuthContext';
 
 const Signin: React.FC = () => {
     const [formData, setFormData] = useState({ username: '', password: '' });
+    const { signIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const handleSubmit = async (e: React.FormEvent) => {
+
         e.preventDefault();
         try {
-            const res = await axios.post(`${BASE_URL}signin`, formData);
-            //localStorage.setItem('token', res.data.result);
-            if (res.data.success) {
-                const userid = res.data.result.split('!!!@#$')[1];
-                storeUserId(userid);
-                const token = res.data.result.split('!!!@#$')[0];
-                storeToken(token);
+            await signIn(formData);
+            navigate('/');
 
-                alert('Signin successful!');
-                navigate('/');
-            }
-            else {
-                alert(res.data.result);
-            }
         } catch (error: any) {
-            console.error(error.response?.data?.message || 'Error occurred');
+            alert(error.message);
         }
     };
 

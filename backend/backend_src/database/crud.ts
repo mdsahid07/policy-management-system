@@ -1,37 +1,31 @@
 import fs from "fs/promises";
 import path from "path";
 
-const usersFilePath = path.join(__dirname, "../database/users.json"); // Path to the users file
+const usersFilePath = path.join(__dirname, "./users.json"); // Path to the users file
 
 export const createUser = async (username: string, password: string): Promise<void> => {
     try {
         // Read the existing users file (if it exists)
-        let users: Array<{ id: number; username: string; password: string; }> = [];
+        let users: Array<{ username: string; password: string; }> = [];
         try {
             const data = await fs.readFile(usersFilePath, "utf8");
             users = JSON.parse(data); // Parse the JSON data into an array
         } catch (err) {
-            // Ignore file not found errors, and start fresh if file is not found
-            // if (err.code !== 'ENOENT') {
-            throw err;
-            // }
+            throw new Error(); // Ignore file not found errors
         }
-
-        // Determine the next available ID (auto-increment)
-        const nextId = users.length > 0 ? Math.max(...users.map(user => user.id)) + 1 : 1;
 
         // Check if the username already exists
         if (users.some(user => user.username === username)) {
             throw new Error(`User ${username} already exists.`);
         }
 
-        // Add the new user with an auto-incrementing id
-        users.push({ id: nextId, username, password });
+        // Add the new user to the array
+        users.push({ username, password });
 
         // Save the updated users array back to the file
         await fs.writeFile(usersFilePath, JSON.stringify(users, null, 2), "utf8");
 
-        console.log(`User ${username} created successfully with ID: ${nextId}.`);
+        console.log(`User ${username} created successfully.`);
     } catch (error) {
         console.error("Error creating user:", error);
     }
@@ -85,7 +79,7 @@ export const checkUser = async (username: string, password: string): Promise<boo
         throw err; // Rethrow for higher-level handling if needed
     }
 };
-const policyFilePath = path.resolve(__dirname, '../database/policies.json');
+const policyFilePath = path.resolve(__dirname, 'policies.json');
 export const create_policy = async (
     title: string,
     description: string,
@@ -93,34 +87,30 @@ export const create_policy = async (
     date: Date,
     category: string
 ): Promise<void> => {
+    // Define the file path for storing policies
+    //const filePath = path.resolve(__dirname, 'policies.json');
+
     try {
-        // Read the existing policies file (if it exists)
-        let policies: Array<{ id: number; title: string; description: string; owner: string; date: string | null; vote: number; category: string; }> = [];
+        // Read the existing file (if it exists)
+        let policies = [];
         try {
             const fileData = await fs.readFile(policyFilePath, 'utf-8');
-            policies = JSON.parse(fileData); // Parse the existing policies
+            policies = JSON.parse(fileData);
         } catch (err) {
-            // if (err.code !== 'ENOENT') {
-            throw err; // Throw other errors (e.g., parsing errors)
-            // }
-            // Ignore the 'file not found' error, and start fresh if no file exists
+
+            throw err; // Ignore "file not found" errors but throw others
+
         }
 
-        // Determine the next available ID for the new policy
-        const nextId = policies.length > 0 ? Math.max(...policies.map(policy => policy.id)) + 1 : 1;
-
-        // Create the new policy object with an auto-incrementing id
+        // Add the new policy to the policies array
         const newPolicy = {
-            id: nextId, // Assign the auto-incrementing id
             title,
             description,
             owner,
-            date: isNaN(new Date(date).getTime()) ? null : new Date(date).toISOString(), // Convert Date to ISO string for serialization
+            date: date.toISOString(), // Convert Date to ISO string for serialization
             vote: 0,
             category,
         };
-
-        // Add the new policy to the policies array
         policies.push(newPolicy);
 
         // Write the updated policies array back to the file
@@ -133,7 +123,7 @@ export const create_policy = async (
     }
 };
 
-const voteFilePath = path.resolve(__dirname, '../database/uservote.json');
+const voteFilePath = path.resolve(__dirname, 'uservote.json');
 
 export const checkVoteDuplication = async (policyid: string, userid: string): Promise<boolean> => {
     try {
@@ -156,6 +146,9 @@ export const checkVoteDuplication = async (policyid: string, userid: string): Pr
         // File doesn't exist, no votes to check
         console.error("Votes file not found.");
         return false;
+
+        console.error("Error reading votes file:", err);
+        throw err; // Rethrow for higher-level handling if needed
     }
 };
 const insertVote = async (userid: string, policyid: string): Promise<void> => {

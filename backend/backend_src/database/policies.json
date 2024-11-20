@@ -1,20 +1,38 @@
 [
   {
     "id": 1,
-    "title": "Pool",
-    "description": "slfsj sjfj;f j;sf  skfl",
+    "title": "No Food Waste",
+    "description": "Take only what you can consume. Avoid wasting food and help reduce unnecessary waste.",
     "owner": "habib",
     "date": "2024-10-31T00:00:00.000Z",
     "vote": 3,
-    "category": "General"
+    "category": "Food"
   },
   {
     "id": 2,
-    "title": "Dinner",
-    "description": "ljl lsjf;s j ljsff jl;sfj j; sf ; sf ",
+    "title": "Maintain Silence",
+    "description": "Speak softly and avoid loud conversations to respect the quiet study environment.",
+    "owner": "habib",
+    "date": "2022-11-03T00:00:00.000Z",
+    "vote": 2,
+    "category": "Library"
+  },
+  {
+    "id": 3,
+    "title": "Silence is Golden",
+    "description": "Keep noise to a minimum. Use the space for quiet reflection or meditation only.",
     "owner": "habib",
     "date": "2024-11-03T00:00:00.000Z",
-    "vote": 2,
+    "vote": 0,
     "category": "Meditation"
+  },
+  {
+    "id": 4,
+    "title": "Clean Up After Eating",
+    "description": "Leave the dining area clean. Dispose of leftovers and wrappers in the proper bins.",
+    "owner": "habib",
+    "date": "2022-11-03T00:00:00.000Z",
+    "vote": 0,
+    "category": "Food"
   }
 ]
